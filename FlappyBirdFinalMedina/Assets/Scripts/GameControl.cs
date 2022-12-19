@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
 {
     public static GameControl instance;
     public GameObject gameOverText;
+    public bool gameOver = false;
+    public Text ScoreText;
+    public float scrollspeed = -1.5f;
 
     private int score = 0;
-    public bool gameOver = false;
-    public float scrollSpeed = -1.5f;
 
     void Awake()
     {
@@ -31,6 +33,16 @@ public class GameControl : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene ().buildIndex);
         }
+    }
+
+    public void BirdScored()
+    {
+        if (gameOver)
+        {
+            return;
+        }
+        score++;
+        ScoreText.text = "Score: " + score.ToString ();
     }
 
     public void BirdDied()
